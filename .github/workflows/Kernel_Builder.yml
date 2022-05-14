@@ -9,6 +9,7 @@ on:
 env:
   GitHubMail: ${{ secrets.GITHUBMAIL }}
   GitHubName: ${{ secrets.GITHUBNAME }}
+  BotToken: ${{ secrets.BOTTOKEN }}
 
 jobs:
   debug:
