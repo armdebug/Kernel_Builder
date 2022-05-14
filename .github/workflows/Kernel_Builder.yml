@@ -30,4 +30,4 @@ jobs:
         timeout-minutes: 340
         continue-on-error: true
         run: |
-          wget https://raw.githubusercontent.com/${GitHubName}/Kernel_Builder/main/Kernel_Builder.sh && chmod +777 Kernel_Builder.sh && ./Kernel_Builder.sh
+          wget https://raw.githubusercontent.com/${GitHubName}/Kernel_Builder/main/Kernel_Builder.sh && chmod +777 Kernel_Builder.sh && bash ./Kernel_Builder.sh
