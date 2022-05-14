@@ -1,0 +1,34 @@
+name: Kernel Builder
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore: 'README.md'
+  workflow_dispatch:
+   
+env:
+  GitHubMail: ${{ secrets.GITHUBMAIL }}
+  GitHubName: ${{ secrets.GITHUBNAME }}
+
+jobs:
+  debug:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Set Git Configs & Secrets
+        run: |
+          git config --global user.email ${GitHubMail}
+          git config --global user.name ${GitHubName}
+          git config --global credential.helper store
+          echo "https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
+          
+      - name: Build Kernel
+        timeout-minutes: 340
+        continue-on-error: true
+        run: |
+          wget https://raw.githubusercontent.com/${GitHubName}/Kernel_Builder/main/Kernel_Builder.sh
+          chmod +777 Kernel_Builder.sh
+          ./Kernel_Builder.sh
